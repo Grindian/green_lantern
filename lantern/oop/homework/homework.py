@@ -82,7 +82,7 @@ class Cat:
 
     def get_saturation_level(self):
         if self.saturation_level <= 0:
-            return "Your pet died! You should feed it better!"
+            return "Your cat is died :("
         else:
             return self.saturation_level
 
@@ -142,8 +142,8 @@ class Wall:
     #       number of rolls of wallpaper eq count of lines divide  count of lines in roll
 
     def number_of_rolls_of_wallpaper(self, roll_width_m, roll_length_m):
-        count_of_lines = self.width/roll_width_m
-        count_of_lines_in_roll = roll_length_m/self.height
+        count_of_lines = self.width//roll_width_m
+        count_of_lines_in_roll = roll_length_m//self.height
         return count_of_lines / count_of_lines_in_roll
 
 
@@ -160,10 +160,10 @@ class Roof:
     #   if roof_type eq "single-pitch" the roof square if simple rectangle square formula
     #   if other roof_type raise ValueError like this "Sorry there is only two types of roofs"
 
-    def roof_square(self, roof_type):
-        if roof_type == "gable":
+    def roof_square(self):
+        if self.roof_type == "gable":
             square_of_the_roof = self.width * self.height * 2
-        elif roof_type == "single-pitch":
+        elif self.roof_type == "single-pitch":
             square_of_the_roof = self.width * self.height
         else:
             raise ValueError("Sorry there is only two types of roofs")
@@ -195,7 +195,8 @@ class Door:
     # * Implement method door_square which return result of simple square formula of rectangle
 
     def door_square(self):
-        return self.width * self.height
+        door_square = self.width * self.height
+        return door_square
 
     # * Implement method door_square which receives material value as a parameter
     #   if material eq wood return door_square multiplied on wood_price
@@ -244,7 +245,7 @@ class House:
     def create_wall(self, width, height):
         if width <= 0 or height <= 0:
             raise ValueError("Value must be more than 0")
-        elif self.__walls.__len__() > 4:
+        elif self.__walls.__len__() == 4:
             raise ValueError("Our house can not have more than 4 walls")
         self.__walls.append(Wall(width, height))
 
@@ -332,7 +333,7 @@ class House:
 
     # * Implement method get_door_square that returns the square of the door
     def get_door_square(self):
-        return self.__door.door_square
+        return self.__door.door_square()
 
     # * Implement method get_number_of_rolls_of_wallpapers that returns sum of the number of rolls of wallpapers
     #   needed for all our walls
@@ -345,6 +346,7 @@ class House:
         for wall in self.__walls:
             number_of_rolls_for_actual_wall = wall.number_of_rolls_of_wallpaper(roll_width_m, roll_length_m)
             total_number_of_rolls_of_wallpapers += number_of_rolls_for_actual_wall
+        return total_number_of_rolls_of_wallpapers
 
     # * Implement method get_room_square that returns the square of our room
     #   (from walls_square divide windows and door square)
