@@ -10,6 +10,7 @@ class Cat:
         self.age = age
         self.average_speed = self._set_average_speed()
         self.saturation_level = 50
+
     # * Implement private methods _increase_saturation_level and _reduce_saturation_level
     #   that will receive value and add/subtract from saturation_level this value
     #   if saturation_level is less than 0, return 0
@@ -142,8 +143,8 @@ class Wall:
     #       number of rolls of wallpaper eq count of lines divide  count of lines in roll
 
     def number_of_rolls_of_wallpaper(self, roll_width_m, roll_length_m):
-        count_of_lines = self.width//roll_width_m
-        count_of_lines_in_roll = roll_length_m//self.height
+        count_of_lines = self.width // roll_width_m
+        count_of_lines_in_roll = roll_length_m // self.height
         return count_of_lines / count_of_lines_in_roll
 
 
